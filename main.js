@@ -1,3 +1,4 @@
+// Electron Module 
 const electron = require('electron')
 // Module to control application life.
 const app = electron.app
@@ -7,13 +8,18 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
 
+// Start eGor on port 3000
+const express = require('./eGor')
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({autoHideMenuBar: false,
+                                  width: 800, 
+                                  height: 600})
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -21,9 +27,10 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }))
+  //mainWindow.loadURL('http://localhost:3000/');
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
